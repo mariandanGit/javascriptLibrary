@@ -1,5 +1,12 @@
-const container = document.getElementById('container');
-const buttonDiv = document.getElementById('button');
+const container = document.getElementById("container");
+const buttonDiv = document.getElementById("button");
+const popUp = document.getElementById("popUpDiv");
+const submitButton = document.getElementById("stubmitButton");
+const form = document.getElementById("form");
+const titleInput =  document.getElementById("titleInput");
+const authorInput =  document.getElementById("authorInput");
+const pagesInput =  document.getElementById("pageInput");
+const checkboxInput =  document.getElementById("checkbox");
 
 let myLibrary = [];
 
@@ -11,9 +18,9 @@ function Book(title, author, pageCount, status) {
    this.status = status;
 }
 
-function addBookToLibrary() {   
+function addBookToLibrary(t, a, p, r) {   
 
-    const newBook = new Book('The Shining', 'Stephen King', 470, true);
+    const newBook = new Book(t, a, p, r);
 
     myLibrary.push(newBook);
 
@@ -36,7 +43,6 @@ function addBookToLibrary() {
         const clickedElement = event.target;
         const index = clickedElement.value;
         myLibrary.splice(index, 1);
-        console.log(myLibrary);
         container.removeChild(bookDiv);
     });
 
@@ -46,8 +52,21 @@ function addBookToLibrary() {
     bookDiv.appendChild(pageCount);
     bookDiv.appendChild(checkBox);
     bookDiv.appendChild(deleteButton);
-
     console.log(myLibrary);
 }
 
-buttonDiv.onclick = (e) => addBookToLibrary();
+function openPopUp(){
+    popUp.style.height = "300px";
+    popUp.style.width = "300px";
+    form.style.display = "flex";
+
+    document.body.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+}
+
+function submitFunction(){
+
+    addBookToLibrary(titleInput.textContent, authorInput.textContent, pagesInput.textContent, checkboxInput.value);
+}
+
+buttonDiv.onclick = (e) => openPopUp();
+submitButton.addEventListener("click", submitFunction);

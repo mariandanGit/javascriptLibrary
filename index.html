@@ -4,46 +4,47 @@
 
 <head>
 
-    <link rel="icon" href="https://www.nicepng.com/png/full/246-2462520_cloud-library-design.png">
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Javascript Library</title>
 
+    <link rel="icon" href="https://www.nicepng.com/png/full/246-2462520_cloud-library-design.png">
     <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-    <header>
+    <main>
 
-        <h1>Your library</h1>
+        <div id="side-form">
+            <h1>NEW BOOK</h1>
 
-    </header>
-
-    <main id="mainContainer">
-
-        <div id="container">
-
-            <div id="button" class="bookDiv">
-
-                <h1>+</h1>
-
+            <div id="form">
+                <input id="title-input" type="text" placeholder="Title">
+                <input id="author-input" type="text" placeholder="Author">
+                <input id="page-input" type="number" placeholder="Page count">
+                <span>
+                    <input id="status-input" type="checkbox">
+                    <label for="status-input">Have you read the book?</label>
+                </span>
+                <button id="submit-button">Add book</button>
             </div>
 
         </div>
 
-    </main>
+        <div id="books-container">      
+            <div id="content">
+            </div>  
+        </div>
 
-    <footer>
-        <h3>This down here is the footer!</h3>
-    </footer>
+    </main>
 
 </body>
 
-<script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script src="sliding.js"></script>
 
 </html>
