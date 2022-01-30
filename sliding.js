@@ -1,69 +1,92 @@
-const slideMenu = document.getElementById("side-form");
-const actualForm = document.getElementById("form");
 const overlay = document.getElementById("overlay");
+const slidingMenu = document.getElementById("side-form");
+const openButton = document.getElementById("open-button");
 const cancelButton = document.getElementById("cancel-button");
+const addButton = document.getElementById("submit-button");
 
-var flag = false;
+const titleInput = document.forms["form"]["title-input"];
+const authorInput = document.forms["form"]["author-input"];
+const pageInput = document.forms["form"]["page-input"];
+const checkBox = document.forms["form"]["status-input"];
 
-function slideHorizontally(){
-   slideMenu.classList.toggle("active");
+const inputs = document.querySelectorAll("input");
 
-   if(slideMenu.classList.contains("active")){
+let resizeTimer;
+window.addEventListener("resize", () => {
+  document.body.classList.add("resize-animation-stopper");
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    document.body.classList.remove("resize-animation-stopper");
+  }, 400);
+});
 
-     slideMenu.removeEventListener("click", slideHorizontally);
-     checkWindowSize();
-
-     slideMenu.style.width = "100%";
-     slideMenu.style.height = "100vh";
+function openForm(){
+     slidingMenu.classList.toggle("active");
      overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-     actualForm.style.display = "flex";
-   }
-   else{
+}
 
-     slideMenu.style.width = "80px";
-     slideMenu.style.height = "100vh";
+function closeForm(){
+     slidingMenu.classList.toggle("active");
      overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
-     slideMenu.style.flexDirection = "row";
-     actualForm.style.display = "none";
-   }
+
+     inputs.forEach(element => {
+          clearInput(element);
+     });
+     checkBox.checked = false;
 }
 
-function slideVertically(){
-     slideMenu.classList.toggle("active");
-  
-     if(slideMenu.classList.contains("active")){
-          slideMenu.style.height = "100%";
-          slideMenu.style.width = "100%";
-          actualForm.style.display = "flex";
+function clearInput(input){
+     input.value = "";
+     input.style.borderBottom = "";
+}
+
+function positiveInteger(str) {
+     return /^([1-9]\d*)$/.test(str);
+ }
+
+function validateInputs(){
+
+     if(titleInput.value === "" || titleInput.style.borderBottom == "2px solid rgb(224, 64, 77)"){ 
+          titleInput.value = "Enter a title!";
+          titleInput.style.borderBottom = "2px solid rgb(224, 64, 77)";
+
+          titleInput.addEventListener("click", function(){
+               clearInput(titleInput);
+          })
      }
-     else{
-          slideMenu.style.width = "100%";
-          slideMenu.style.height = "80px";
-          actualForm.style.display = "none";
+     else if(authorInput.value === "" || authorInput.style.borderBottom == "2px solid rgb(224, 64, 77)"){
+          authorInput.value = "Enter an author!";
+          authorInput.style.borderBottom = "2px solid rgb(224, 64, 77)";
+
+          authorInput.addEventListener("click", function(){
+               clearInput(authorInput);
+          })
+     }
+     else if(pageInput.value === "" || pageInput.style.borderBottom === "2px solid rgb(224, 64, 77)"){
+          pageInput.value = "Enter page count!";
+          pageInput.style.borderBottom = "2px solid rgb(224, 64, 77)";
+
+          pageInput.addEventListener("click", function(){
+               clearInput(pageInput);
+          })
+     }
+     else if(!positiveInteger(pageInput.value)){
+          pageInput.value = "Page count is a positive number!";
+          pageInput.style.borderBottom = "2px solid rgb(224, 64, 77)";
+
+          pageInput.addEventListener("click", function(){
+               clearInput(pageInput);
+          })
+     }
+     else return 1;
+}
+
+function addBook(){
+     if(validateInputs()){
+          
      }
 }
 
-function checkWindowSize(){
-     if(window.innerWidth <= 800){
-
-          slideMenu.style.width = "100%";
-          slideMenu.style.height = "80px";
-          actualForm.style.display = "none";
-          overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
-
-          slideMenu.removeEventListener("click", slideHorizontally);
-          slideMenu.addEventListener("click", slideVertically);
-     }
-     else{
-
-          slideMenu.style.width = "80px";
-          slideMenu.style.height = "100vh";
-          actualForm.style.display = "none";
-
-          slideMenu.removeEventListener("click", slideVertically);
-          slideMenu.addEventListener("click", slideHorizontally);
-     }
-}
-
-checkWindowSize();
-window.addEventListener("resize", checkWindowSize);
+openButton.addEventListener("click", openForm);
+cancelButton.addEventListener("click", closeForm);
+addButton.addEventListener("click", addBook);

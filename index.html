@@ -11,6 +11,7 @@
     <title>Javascript Library</title>
 
     <link rel="icon" href="https://www.nicepng.com/png/full/246-2462520_cloud-library-design.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -22,17 +23,19 @@
         <div id="side-form">
             <h1>NEW BOOK</h1>
 
-            <div id="form">
+            <form id="form" action="#">
                 <input id="title-input" type="text" placeholder="Title">
                 <input id="author-input" type="text" placeholder="Author">
-                <input id="page-input" type="number" placeholder="Page count">
+                <input id="page-input" type="text" placeholder="Page count">
                 <span>
                     <input id="status-input" type="checkbox">
                     <label for="status-input">Have you read the book?</label>
                 </span>
                 <button class="buttons" id="submit-button">Add book</button>
                 <button class="buttons" id="cancel-button">Cancel</button>
-            </div>
+            </form>
+
+            <button id="open-button"><i class="fa fa-chevron-circle-right"></i></button>
 
         </div>
 
