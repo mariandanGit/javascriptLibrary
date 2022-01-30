@@ -12,6 +12,22 @@ main{
     display: flex;
     flex-direction: row;
 }
+#github-profile{
+    position: absolute;
+    border-radius: 50%;
+    width: 50px;
+    left: 0;
+    bottom:0;
+    margin: 10px;
+    border: 3px solid transparent;
+    transition: .2s;
+}
+#github-profile:hover{
+    border: 3px solid mediumspringgreen;
+}
+#side-form.active #github-profile{
+    display: none;
+}
 #side-form{
     position: relative;
     height: 100vh;
@@ -75,7 +91,6 @@ main{
     color:white;
     font-size: 20px;
     transition: .2s;
-    
 }
 #form input:hover{
     border-bottom: 2px solid rgba(255, 255, 255, 1);
@@ -125,7 +140,7 @@ main{
     position: relative;
     color:white;
     width: 100%;
-    height: 100vh;
+    height: fit-content;
     background-color: rgb(255, 245, 226);
 }
 #overlay{
@@ -137,7 +152,55 @@ main{
     top: 0;
     bottom: 0;
     right: 0;
+    z-index: -1;
     transition: 0.2s;
+}
+#books-container-content{
+    height: 100vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#books-container-content h1{
+    text-align: center;
+    color: black;
+    font-weight: bold;
+}
+#books-table{
+    color:black;
+    margin: 20px;
+    width: 80%;
+}
+#books-table th{
+    background-color:rgb(55, 51, 52);
+    color: white;
+    padding:10px;
+}
+#books-table tr{
+    transition: .1s;
+}
+#books-table tr:nth-child(even){
+    background-color: rgb(230, 230, 230);
+}
+#books-table tr:nth-child(odd){
+    background-color: rgb(255, 255, 255);
+}
+#books-table tr:hover{
+    background-color: rgba(0, 250, 154, 0.3);
+}
+#books-table td{
+    text-align: center;
+    padding: 10px;
+}
+.deleteButton{
+    font-size: 25px;
+    width: 100%;
+    height: 100%;
+    transition: .1s;
+}
+.deleteButton:hover{
+    color:rgb(224, 64, 77);
 }
 @keyframes textAnimation{
     0%{
@@ -165,16 +228,12 @@ main{
         color: transparent;
     }
     100%{
-        /* left:50%;
-        transform: translateX(-50%); */
         color: white;
     }
 }
 @keyframes textAnimationSmallReverse{
     0%{
         color:white;
-        /* left:50%;
-        transform: translateX(-50%); */
     }
     80%{
         color: transparent;
@@ -185,7 +244,7 @@ main{
 }
 @media only screen and (max-width: 800px) {
     #side-form{
-        position: absolute;
+        position:fixed;
         top:0;
         left:0;
         height: 80px;
@@ -219,7 +278,7 @@ main{
         display: none;
     }
     #side-form.active{
-        height: 100%;
+        height: 100vh;
         width: 100%;
         background-color: rgb(55, 51, 52);
         display: flex;
@@ -228,6 +287,21 @@ main{
         align-items: center;
         color:white;
         transition: .2s;
+        z-index: 2;
+    }
+    #side-form.active #form{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #books-container-content{
+        margin-top: 80px;
+    }
+    #github-profile{
+        position: fixed;
+        left:0;
+        top:4px;
         z-index: 2;
     }
 }
